@@ -2,7 +2,7 @@
 
 export const EDIT = 'EDIT'
 
-export const edit = (index, value) => ({
+export const edit = (index: number, value: Object): Object => ({
   type: EDIT,
-  payload: {index, edit}
+  payload: {index, value}
 })

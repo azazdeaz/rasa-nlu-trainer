@@ -1,6 +1,9 @@
+// @flow
+
 import React, { Component } from 'react';
 import { Table } from 'antd'
 import { connect } from 'react-redux'
+import ExampleEditor from './ExampleEditor'
 
 const mapState = (state) => ({
   examples: state.examples.rasa_nlu_data.entity_examples
@@ -36,16 +39,20 @@ class ExampleTable extends Component {
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
         },
-      }
+      },
       { title: 'Action', dataIndex: '', key: 'x', render: () => <a href="#">Delete</a> },
     ]
 
     return (
       <Table
         columns={columns}
-        dataSource={examples}
-        pagination={{showSizeChanger: true, pageSizeOptions: ['10', '20', '40', '80', '160', '320']}}
-        expandedRowRender={example => <div />}
+        dataSource={examples.map((example, index) => ({...example, index}))}
+        rowKey='index'
+        pagination={{
+          showSizeChanger: true,
+          pageSizeOptions: ['10', '20', '40', '80', '160', '320'],
+        }}
+        expandedRowRender={(example, index) => <ExampleEditor {...example} />}
       />
     );
   }

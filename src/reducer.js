@@ -14,10 +14,11 @@ export default function (
   state: Object = INITIAL_STATE,
   action: Object
 ): Object {
+  console.log(action)
   switch (action.type) {
     case EDIT: {
       const { index, value } = action.payload
-      return immutable.set(state, `examples.${index}`, value)
+      return immutable.set(state, `examples.rasa_nlu_data.entity_examples.${index}`, value)
     }
     default:
       return state
