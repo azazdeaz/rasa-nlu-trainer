@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Table } from 'antd'
 import { connect } from 'react-redux'
 import ExampleEditor from './ExampleEditor'
+import TextEditor from './TextEditor'
 
 const mapState = (state) => ({
   examples: state.examples.rasa_nlu_data.entity_examples
@@ -36,11 +37,13 @@ class ExampleTable extends Component {
         title: 'Text',
         dataIndex: 'text',
         key: 'text',
+        render: (_, example) => (
+          <TextEditor example={example} index={example.index}/>
+        ),
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
         },
       },
-      { title: 'Action', dataIndex: '', key: 'x', render: () => <a href="#">Delete</a> },
     ]
 
     return (
@@ -54,7 +57,7 @@ class ExampleTable extends Component {
         }}
         expandedRowRender={(example, index) => <ExampleEditor {...example} />}
       />
-    );
+    )
   }
 }
 

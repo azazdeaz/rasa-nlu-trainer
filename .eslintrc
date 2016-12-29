@@ -1,0 +1,40 @@
+// @see https://github.com/airbnb/javascript/blob/master/linters/.eslintrc
+{
+  "extends": [
+    "plugin:flowtype/recommended"
+  ],
+  "parser": "babel-eslint",          // https://github.com/babel/babel-eslint
+  "plugins": [
+    "react",                          // https://github.com/yannickcr/eslint-plugin-react
+    "flowtype"
+  ],
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "ecmaFeatures": {
+    "modules": true,
+    "jsx": true
+  },
+  "rules": {
+    "comma-dangle": 0,
+    "no-underscore-dangle": 0,
+    "quotes": [0, "single", "avoid-escape"],
+    "no-unused-vars": [2, {vars: "local"}],
+    "no-undef": 2,
+    "no-redeclare": 2,
+    "react/jsx-no-undef": 2,
+    "react/jsx-uses-vars": 2,
+    "react/jsx-uses-react": 2
+  },
+  "globals": {
+    "requestAnimationFrame": false,
+    "__DEVELOPMENT__": true,
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  }
+}
