@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Table, Input, Button } from 'antd'
+import { Table, Input, Button, Icon } from 'antd'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 import immutable from 'object-path-immutable'
@@ -60,7 +60,7 @@ class EntityTable extends Component {
       )
   }
   render() {
-    const { example } = this.props
+    const { example, edit, index } = this.props
     const entities = example.entities || []
 
     const createInput = (key: string) => (_, entity) => {
@@ -94,6 +94,16 @@ class EntityTable extends Component {
         render: (_, entity) => (
           <span>
             {example.text.substr(entity.start, entity.end - entity.start)}
+          </span>
+        ),
+      }, {
+        title: '',
+        key: 'actions',
+        render: (_, entity) => (
+          <span>
+            <Icon type='delete' onClick={() => {
+              edit(index, immutable.del(example, `entities.${entity.index}`))
+            }}/>
           </span>
         ),
       },
