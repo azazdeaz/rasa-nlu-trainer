@@ -9,6 +9,7 @@ import {
   DELETE_EXAMPLE,
   SET_SELECTION,
   FETCH_DATA,
+  SAVING_DONE,
 } from './actions'
 
 const INITIAL_STATE = {
@@ -26,25 +27,28 @@ export default function (
   switch (action.type) {
     case EDIT: {
       const { index, value } = action.payload
-      return immutable.set(
+      state = immutable.set(
         state,
         `examples.rasa_nlu_data.entity_examples.${index}`,
         value,
       )
+      return {...state, isUnsaved: true}
     }
     case DELETE_EXAMPLE: {
       const { index } = action.payload
-      return immutable.del(
+      state = immutable.del(
         state,
         `examples.rasa_nlu_data.entity_examples.${index}`,
       )
+      return {...state, isUnsaved: true}
     }
     case SET_SELECTION: {
       const { index, start, end } = action.payload
       if (start === end) {
         return state
       }
-      return immutable.set(state, `selection`, { index, start, end })
+      state = immutable.set(state, `selection`, { index, start, end })
+      return {...state, isUnsaved: true}
     }
     case FETCH_DATA: {
       if (IS_DEMO) {
@@ -55,6 +59,12 @@ export default function (
         ...state,
         examples: data,
         filename: path,
+      }
+    }
+    case SAVING_DONE: {
+      return {
+        ...state,
+        isUnsaved: false,
       }
     }
     default:

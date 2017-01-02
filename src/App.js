@@ -2,11 +2,15 @@
 
 import React, { Component } from 'react';
 import ExampleTable from './ExampleTable'
+import TopBar from './TopBar'
 
 class App extends Component {
   render() {
     return (
-      <ExampleTable />
+      <div>
+        <TopBar/>
+        <ExampleTable />
+      </div>
     )
   }
 }

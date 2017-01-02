@@ -146,6 +146,23 @@ function serve() {
     })
   })
 
+  app.post('/save', function (req, res) {
+    const data = req.body
+    console.log('save', data)
+    if (!data
+      || !data.rasa_nlu_data
+      || !data.rasa_nlu_data.entity_examples
+    ) {
+      res.json({error: 'file is invalid'})
+    }
+    fs.writeFile(sourceFile.path, JSON.stringify(data, null, 2), (error) => {
+      if (error) {
+        return res.json({error})
+      }
+      return res.json({ok: true})
+    })
+  })
+
   app.listen(config.port)
   console.log('Listening at http://localhost:' + config.port + '/')
 }

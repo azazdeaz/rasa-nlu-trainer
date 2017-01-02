@@ -24,7 +24,7 @@ export const setSelection = (
 })
 
 export const FETCH_DATA = 'FETCH_DATA'
-export const loadData = () => async (dispatch: Function): void => {
+export const loadData = () => async (dispatch: Function): Promise<void> => {
   const response: Object = await fetch(`http://localhost:${config.port}/data`, {
     method: 'POST',
   })
@@ -35,4 +35,25 @@ export const loadData = () => async (dispatch: Function): void => {
       response: json,
     }
   })
+}
+
+export const SAVING_DONE = 'SAVING_DONE'
+export const save = (data: Object): Function =>  async (
+  dispatch: Function
+): Promise<void> => {
+  const response = await fetch(`http://localhost:${config.port}/save`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  //TODO add progressing feedback
+  const json = await response.json()
+  if (json.ok) {
+    dispatch({
+      type: SAVING_DONE,
+    })
+  }
 }
