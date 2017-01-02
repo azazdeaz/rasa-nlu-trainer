@@ -1,18 +1,27 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Table } from 'antd'
+import { Table, Spin } from 'antd'
 import { connect } from 'react-redux'
 import ExampleEditor from './ExampleEditor'
 import TextEditor from './TextEditor'
 
 const mapState = (state) => ({
-  examples: state.examples.rasa_nlu_data.entity_examples
+  examples: state.examples
+    && state.examples.rasa_nlu_data
+    && state.examples.rasa_nlu_data.entity_examples
 })
 
 class ExampleTable extends Component {
   render() {
     const { examples } = this.props
+
+    if (!examples) {
+      return <Spin style={{ width: '100%', height: '100%' }}>
+        <div />
+      </Spin>
+    }
+
     const intents = []
     examples.forEach(({intent}) => {
       if (intents.indexOf(intent) === -1) {

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, PropTypes } from 'react';
-import { Input } from 'antd'
+import { Input, Button } from 'antd'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 import EntityTable from './EntityTable'
@@ -9,7 +9,10 @@ import EntityTable from './EntityTable'
 const mapActions = dispatch => ({
   edit: (index, example) => {
     dispatch(actions.edit(index, example))
-  }
+  },
+  deleteExample: (index) => {
+    dispatch(actions.deleteExample(index))
+  },
 })
 
 class ExampleEditor extends Component {
@@ -25,7 +28,7 @@ class ExampleEditor extends Component {
   }
 
   render() {
-    const { intent, index } = this.props
+    const { intent, index, deleteExample } = this.props
 
     return (
       <div>
@@ -36,6 +39,9 @@ class ExampleEditor extends Component {
           addonBefore='intent'
         />
         <EntityTable index={index} />
+        <Button
+          onClick={() => deleteExample(index)}
+        >Delete example</Button>
       </div>
     )
   }

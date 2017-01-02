@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import Table from './ExampleTable'
+import ExampleTable from './ExampleTable'
 
 class App extends Component {
   render() {
     return (
-      <Table />
+      <ExampleTable />
     )
   }
 }
