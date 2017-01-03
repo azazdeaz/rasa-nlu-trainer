@@ -17,6 +17,7 @@
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
+    "update-notifier": "^1.0.3",
     "walkdir": "0.0.11",
     "yargs": "^6.6.0"
   },

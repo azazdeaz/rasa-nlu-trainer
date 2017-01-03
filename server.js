@@ -8,6 +8,11 @@ app.use(bodyParser.json())
 const config = require('./config.js')
 const findit = require('findit')
 
+const updateNotifier = require('update-notifier')
+const pkg = require('./package.json')
+
+updateNotifier({pkg}).notify()
+
 const fs = require('fs')
 const argv = require('yargs')
   .usage('This is my awesome program\n\nUsage: $0 [options]')
