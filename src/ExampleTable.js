@@ -5,16 +5,27 @@ import { Table, Spin } from 'antd'
 import { connect } from 'react-redux'
 import ExampleEditor from './ExampleEditor'
 import TextEditor from './TextEditor'
+import * as actions from './actions'
 
 const mapState = (state) => ({
+  expandeds: state.expandeds,
   examples: state.examples
     && state.examples.rasa_nlu_data
     && state.examples.rasa_nlu_data.entity_examples
 })
 
+const mapActions = dispatch => ({
+  expand: (index) => {
+    dispatch(actions.expand(index))
+  },
+  collapse: (index) => {
+    dispatch(actions.collapse(index))
+  },
+})
+
 class ExampleTable extends Component {
   render() {
-    const { examples } = this.props
+    const { examples, expandeds, expand, collapse } = this.props
 
     if (!examples) {
       return <Spin style={{ width: '100%', height: '100%' }}>
@@ -61,14 +72,23 @@ class ExampleTable extends Component {
         columns={columns}
         dataSource={examples.map((example, index) => ({...example, index}))}
         rowKey='index'
+        expandedRowKeys={expandeds}
+        onExpand={(expanded, example) => {
+          if (expanded) {
+            expand(example.index)
+          }
+          else {
+            collapse(example.index)
+          }
+        }}
         pagination={{
           showSizeChanger: true,
           pageSizeOptions: ['10', '20', '40', '80', '160', '320'],
         }}
-        expandedRowRender={(example, index) => <ExampleEditor {...example} />}
+        expandedRowRender={(example) => <ExampleEditor {...example} />}
       />
     )
   }
 }
 
-export default connect(mapState)(ExampleTable)
+export default connect(mapState, mapActions)(ExampleTable)

@@ -57,3 +57,15 @@ export const save = (data: Object): Function =>  async (
     })
   }
 }
+
+export const EXPAND = 'EXPAND'
+export const expand = (index: number): Object => ({
+  type: EXPAND,
+  payload: index
+})
+
+export const COLLAPSE = 'COLLAPSE'
+export const collapse = (index: number): Object => ({
+  type: COLLAPSE,
+  payload: index
+})
