@@ -24,10 +24,11 @@ class ExampleTable extends Component {
 
     const intents = []
     examples.forEach(({intent}) => {
-      if (intents.indexOf(intent) === -1) {
+      if (intent && intents.indexOf(intent) === -1) {
         intents.push(intent)
       }
     })
+    console.log(intents)
 
     const columns = [
       {

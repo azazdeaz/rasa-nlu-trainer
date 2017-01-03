@@ -47,16 +47,6 @@ class ExampleEditor extends Component {
       }
     }, false)
   }
-  handleIntentChange(event: Object) {
-    const { edit, index, text, entities } = this.props
-    const intent = event.target.value
-
-    edit(index, {
-      text,
-      intent,
-      entities,
-    })
-  }
 
   handleTextChange(event: Object) {
     const {
@@ -117,7 +107,7 @@ class ExampleEditor extends Component {
 
     edit(exampleIndex, {
       text,
-      intent: this.props.intent,
+      intent: oldExample.intent,
       entities,
     })
   }
