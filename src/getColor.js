@@ -23,7 +23,7 @@ export default function getColor(seed) {
   return {
     backgroundColor: colors[index].bg,
     opacity: 0.3,
-    filter: 'blur(2px)',
+    filter: 'blur(1px)',
   }
 }
 

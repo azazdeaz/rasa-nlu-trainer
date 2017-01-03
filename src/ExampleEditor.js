@@ -20,6 +20,7 @@ class ExampleEditor extends Component {
       <div>
         <EntityTable index={index} />
         <Button
+          style={{ float: 'right' }}
           onClick={() => deleteExample(index)}
         >Delete example</Button>
       </div>

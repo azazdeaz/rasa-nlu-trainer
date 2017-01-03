@@ -38,7 +38,7 @@ class EntityTable extends Component {
     return selectionText
       ? (
         <Button
-          primary
+          type='primary'
           onClick={() => {
             edit(
               index,
@@ -110,8 +110,9 @@ class EntityTable extends Component {
     ]
 
     return (
-      <div>
+      <div style={{marginBottom: 5}}>
         <Table
+          style={{marginBottom: 8}}
           size='small'
           pagination={false}
           columns={columns}

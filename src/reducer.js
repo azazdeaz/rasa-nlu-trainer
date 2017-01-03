@@ -57,8 +57,7 @@ export default function reducer (
       if (start === end) {
         return state
       }
-      state = immutable.set(state, `selection`, { index, start, end })
-      return {...state, isUnsaved: true}
+      return immutable.set(state, `selection`, { index, start, end })
     }
     case FETCH_DATA: {
       if (IS_DEMO) {

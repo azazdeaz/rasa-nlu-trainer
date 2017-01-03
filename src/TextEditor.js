@@ -1,13 +1,19 @@
 // @flow
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
+import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 import getColor from './getColor'
 import * as actions from './actions'
+import { Input } from 'antd'
 
 const styles = {
   text: {},
-  highlightText: {color: 'transparent'},
+  highlightText: {
+    color: 'transparent',
+    pointerEvents: 'none',
+    padding: '5px 8px',
+  },
   zeroPos: {
     position: 'absolute',
     top: 0,
@@ -118,12 +124,12 @@ class ExampleEditor extends Component {
     const end = text.substr(entity.end)
 
     return (
-      <div key={key} style={styles.zeroPos}>
-        <span style={styles.highlightText}>{start}</span>
-        <span style={{...styles.highlightText, ...getColor(entity.entity)}}>
+      <div key={key} style={{...styles.zeroPos, ...styles.highlightText}}>
+        <span>{start}</span>
+        <span style={{...getColor(entity.entity)}}>
           {value}
         </span>
-        <span style={styles.highlightText}>{end}</span>
+        <span>{end}</span>
       </div>
     )
   }
@@ -133,20 +139,19 @@ class ExampleEditor extends Component {
     const { text, entities = [] } = example
 
     return (
-      <div>
+      <div style={{ width: '100%' }}>
         <div
           style={{position: 'relative'}}
           ref={node => this.selectionAnchorNode = node}
         >
-          {entities.map((entity, index) => {
-            return this.renderEntityHighlight(text, entity, index)
-          })}
-          <input
-            ref={node => this.inputNode = node}
-            style={{...styles.zeroPos, ...styles.input}}
+          <Input
+            ref={node => this.inputNode = node && findDOMNode(node)}
             onChange={event => this.handleTextChange(event)}
             value={text}
           />
+          {entities.map((entity, index) => {
+            return this.renderEntityHighlight(text, entity, index)
+          })}
         </div>
       </div>
     )

@@ -58,6 +58,7 @@ class ExampleTable extends Component {
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
         },
+        width: '30%',
       }, {
         title: 'Text',
         dataIndex: 'text',
@@ -68,6 +69,7 @@ class ExampleTable extends Component {
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
         },
+        width: '70%',
       },
     ]
 
