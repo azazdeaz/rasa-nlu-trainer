@@ -7,37 +7,17 @@ import * as actions from './actions'
 import EntityTable from './EntityTable'
 
 const mapActions = dispatch => ({
-  edit: (index, example) => {
-    dispatch(actions.edit(index, example))
-  },
   deleteExample: (index) => {
     dispatch(actions.deleteExample(index))
   },
 })
 
 class ExampleEditor extends Component {
-  handleIntentChange(event: Object) {
-    const { edit, index, text, entities } = this.props
-    const intent = event.target.value
-
-    edit(index, {
-      text,
-      intent,
-      entities,
-    })
-  }
-
   render() {
-    const { intent, index, deleteExample } = this.props
+    const { index, deleteExample } = this.props
 
     return (
       <div>
-        <Input
-          value={intent}
-          onChange={event => this.handleIntentChange(event)}
-          placeholder='intent'
-          addonBefore='intent'
-        />
         <EntityTable index={index} />
         <Button
           onClick={() => deleteExample(index)}

@@ -5,6 +5,7 @@ import { Table, Spin } from 'antd'
 import { connect } from 'react-redux'
 import ExampleEditor from './ExampleEditor'
 import TextEditor from './TextEditor'
+import IntentEditor from './IntentEditor'
 import * as actions from './actions'
 
 const mapState = (state) => ({
@@ -50,6 +51,9 @@ class ExampleTable extends Component {
           text: intent,
           value: intent,
         })),
+        render: (_, example) => (
+          <IntentEditor example={example} intents={intents} />
+        ),
         onFilter: (value, example) => example.intent === value,
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
@@ -59,7 +63,7 @@ class ExampleTable extends Component {
         dataIndex: 'text',
         key: 'text',
         render: (_, example) => (
-          <TextEditor example={example} index={example.index}/>
+          <TextEditor example={example} index={example.index} />
         ),
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
@@ -85,7 +89,9 @@ class ExampleTable extends Component {
           showSizeChanger: true,
           pageSizeOptions: ['10', '20', '40', '80', '160', '320'],
         }}
-        expandedRowRender={(example) => <ExampleEditor {...example} />}
+        expandedRowRender={(example) => (
+          <ExampleEditor {...example}/>
+        )}
       />
     )
   }
