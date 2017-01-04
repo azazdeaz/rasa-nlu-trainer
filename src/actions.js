@@ -1,5 +1,7 @@
 // @flow
-import config from '../config'
+const ROOT_PATH = process.env.NODE_ENV === 'production'
+  ? '/'
+  : 'http://localhost:4321/'
 
 export const EDIT = 'EDIT'
 export const edit = (index: number, value: Object): Object => ({
@@ -25,7 +27,7 @@ export const setSelection = (
 
 export const FETCH_DATA = 'FETCH_DATA'
 export const loadData = () => async (dispatch: Function): Promise<void> => {
-  const response: Object = await fetch(`http://localhost:${config.port}/data`, {
+  const response: Object = await fetch(`${ROOT_PATH}data`, {
     method: 'POST',
   })
   const json = await response.json()
@@ -41,7 +43,7 @@ export const SAVING_DONE = 'SAVING_DONE'
 export const save = (data: Object): Function =>  async (
   dispatch: Function
 ): Promise<void> => {
-  const response = await fetch(`http://localhost:${config.port}/save`, {
+  const response = await fetch(`${ROOT_PATH}save`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

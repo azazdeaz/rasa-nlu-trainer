@@ -7,8 +7,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json())
-const config = require('./config.js')
 const findit = require('findit')
+const getPort = require('get-port')
+const open = require('open')
 
 const updateNotifier = require('update-notifier')
 const pkg = require('./package.json')
@@ -33,7 +34,7 @@ const argv = require('yargs')
   })
   .default({
     source: null,
-    port: config.port,
+    port: null,
   })
   .argv
 
@@ -112,9 +113,12 @@ else {
       inReading++
       readData(path.join(__dirname, file))
         .then(data => {
-          sourceFile.data = data,
-          sourceFile.path = fullPath
-          sourceFile.isLoaded = true
+          if (!sourceFile.isLoaded) { // an other file could be loaded in the meantime
+            sourceFile.data = data,
+            sourceFile.path = fullPath
+            sourceFile.isLoaded = true
+            console.log(`found ${fullPath}`)
+          }
         })
         .catch(() => {})
         .then(() => {
@@ -135,6 +139,15 @@ function serve() {
   // app.use(express.static('./build'))
 
   app.use(express.static(path.join(__dirname, './build')))
+
+  if (process.env.NODE_ENV !== 'production') {
+    //the dev server is running on an other port
+    app.use(function(req, res, next) {
+      res.header('Access-Control-Allow-Origin', '*')
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+      next()
+    })
+  }
 
   app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, './build', 'index.html'))
@@ -164,6 +177,17 @@ function serve() {
     })
   })
 
-  app.listen(config.port)
-  console.log('Listening at http://localhost:' + config.port + '/')
+  if (argv.port) {
+    listen(argv.port)
+  }
+  else {
+    getPort().then(port => listen(port))
+  }
+
+  function listen(port) {
+    app.listen(port)
+    const url = `http://localhost:${port}/`
+    console.log(`Listening at ${url}`)
+    open(url)
+  }
 }
