@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "gh-pages": "^0.12.0",
-    "react-scripts": "0.8.4"
+    "react-scripts": "0.8.4",
+    "replace": "^0.3.0"
   },
   "dependencies": {
     "antd": "^2.5.3",
@@ -24,10 +25,16 @@
   },
   "scripts": {
     "start": "node server.js &! react-scripts start",
-    "build": "react-scripts build",
+    "build-demo": "react-scripts build",
+    "build": "react-scripts build && replace '\"/rasa-nlu-trainer/' '\"/' ./build/index.html",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "publish-demo": "npm run build && gh-pages -d build"
+    "publish-demo": "npm run build-demo && gh-pages -d build",
+    "publish-npm": "npm run build && npm publish"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "rasa-nlu-trainer": "./server.js"
   },
   "homepage": "https://azazdeaz.github.io/rasa-nlu-trainer/"
 }
