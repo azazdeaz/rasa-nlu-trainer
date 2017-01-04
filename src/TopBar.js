@@ -15,11 +15,22 @@ const mapActions = dispatch => ({
   save: (examples) => {
     dispatch(actions.save(examples))
   },
+  openAddModal: () => {
+    dispatch(actions.openAddModal())
+  },
 })
+
+const styles = {
+  button: {
+    height: 28,
+    marginTop: 2,
+    marginRight: 8,
+  }
+}
 
 class TopBar extends Component {
   render() {
-    const { filename, isUnsaved, examples, save } = this.props
+    const { filename, isUnsaved, examples, save, openAddModal } = this.props
 
     return (
       <div style={{ height: 32, display: 'flex' }}>
@@ -28,7 +39,14 @@ class TopBar extends Component {
         </h3>
         <div style={{flex: 1}} />
         <Button
-          style={{ height: 28, marginTop: 2, marginRight: 8 }}
+          style={styles.button}
+          type='primary'
+          onClick={() => openAddModal()}
+        >
+          Add new example
+        </Button>
+        <Button
+          style={styles.button}
           type={isUnsaved ? 'primary' : 'default'}
           onClick={() => save(examples)}
         >

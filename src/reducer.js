@@ -12,6 +12,9 @@ import {
   SAVING_DONE,
   EXPAND,
   COLLAPSE,
+  OPEN_ADD_MODAL,
+  CLOSE_ADD_MODAL,
+  SAVE_AND_CLOSE_ADD_MODAL,
 } from './actions'
 
 const INITIAL_STATE = {
@@ -20,6 +23,7 @@ const INITIAL_STATE = {
   isUnsaved: false,
   selection: null,
   expandeds: [],
+  idxExampleInModal: null,
 }
 
 export default function reducer (
@@ -88,6 +92,26 @@ export default function reducer (
         return state
       }
       return immutable.del(state, `expandeds.${expIndex}`)
+    }
+
+    case OPEN_ADD_MODAL: {
+      state = immutable.push(
+        state,
+        `examples.rasa_nlu_data.entity_examples`,
+        {text: '', intent: '', entities: []},
+      )
+      const index = state.examples.rasa_nlu_data.entity_examples.length - 1
+      return immutable.set(state, `idxExampleInModal`, index)
+    }
+    case CLOSE_ADD_MODAL: {
+      state = immutable.del(
+        state,
+        `examples.rasa_nlu_data.entity_examples.${state.idxExampleInModal}`,
+      )
+      return immutable.set(state, `idxExampleInModal`, null)
+    }
+    case SAVE_AND_CLOSE_ADD_MODAL: {
+      return immutable.set(state, `idxExampleInModal`, null)
     }
     default:
       return state

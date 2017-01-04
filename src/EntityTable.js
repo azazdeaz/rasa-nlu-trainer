@@ -55,7 +55,7 @@ class EntityTable extends Component {
       )
       : (
         <Button disabled={true}>
-          'select part of the text to create a new entity'
+          'select some part of the text to create a new entity'
         </Button>
       )
   }

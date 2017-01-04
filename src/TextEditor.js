@@ -135,11 +135,11 @@ class ExampleEditor extends Component {
   }
 
   render() {
-    const { example } = this.props
+    const { example, style } = this.props
     const { text, entities = [] } = example
 
     return (
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%', ...style }}>
         <div
           style={{position: 'relative'}}
           ref={node => this.selectionAnchorNode = node}
@@ -148,6 +148,7 @@ class ExampleEditor extends Component {
             ref={node => this.inputNode = node && findDOMNode(node)}
             onChange={event => this.handleTextChange(event)}
             value={text}
+            placeholder='text'
           />
           {entities.map((entity, index) => {
             return this.renderEntityHighlight(text, entity, index)

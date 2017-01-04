@@ -69,3 +69,16 @@ export const collapse = (index: number): Object => ({
   type: COLLAPSE,
   payload: index
 })
+
+export const OPEN_ADD_MODAL = 'OPEN_ADD_MODAL'
+export const openAddModal = (): Object => ({
+  type: OPEN_ADD_MODAL,
+})
+export const CLOSE_ADD_MODAL = 'CLOSE_ADD_MODAL'
+export const closeAddModal = (): Object => ({
+  type: CLOSE_ADD_MODAL,
+})
+export const SAVE_AND_CLOSE_ADD_MODAL = 'SAVE_AND_CLOSE_ADD_MODAL'
+export const saveAndCloseAddModal = (): Object => ({
+  type: SAVE_AND_CLOSE_ADD_MODAL,
+})

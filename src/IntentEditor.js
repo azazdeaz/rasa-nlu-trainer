@@ -13,9 +13,9 @@ const mapActions = dispatch => ({
 
 class IntentEditor extends Component {
   handleIntentChange(intent: string) {
-    const { example, edit } = this.props
+    const { example, edit, index } = this.props
 
-    edit(example.index, {
+    edit(index, {
       text: example.text,
       intent,
       entities: example.entities,
@@ -23,15 +23,15 @@ class IntentEditor extends Component {
   }
 
   render() {
-    const { example, intents } = this.props
+    const { example, intents, style } = this.props
 
     return (
       <AutoComplete
         dataSource={intents}
-        style={{ width: 230 }}
+        style={{ width: 230, ...style }}
         value={example.intent}
         onSelect={value => this.handleIntentChange(value)}
-        onChange={event => this.handleIntentChange(event.target.value)}
+        onChange={value => this.handleIntentChange(value)}
         placeholder='intent'
       />
     )

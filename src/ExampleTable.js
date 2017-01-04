@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Table, Spin } from 'antd'
+import { Table } from 'antd'
 import { connect } from 'react-redux'
 import ExampleEditor from './ExampleEditor'
 import TextEditor from './TextEditor'
@@ -26,21 +26,7 @@ const mapActions = dispatch => ({
 
 class ExampleTable extends Component {
   render() {
-    const { examples, expandeds, expand, collapse } = this.props
-
-    if (!examples) {
-      return <Spin style={{ width: '100%', height: '100%' }}>
-        <div />
-      </Spin>
-    }
-
-    const intents = []
-    examples.forEach(({intent}) => {
-      if (intent && intents.indexOf(intent) === -1) {
-        intents.push(intent)
-      }
-    })
-    console.log(intents)
+    const { examples, expandeds, expand, collapse, intents } = this.props
 
     const columns = [
       {
@@ -52,7 +38,11 @@ class ExampleTable extends Component {
           value: intent,
         })),
         render: (_, example) => (
-          <IntentEditor example={example} intents={intents} />
+          <IntentEditor
+            example={example}
+            index={example.index}
+            intents={intents}
+          />
         ),
         onFilter: (value, example) => example.intent === value,
         sorter: (a, b) => {
@@ -64,7 +54,10 @@ class ExampleTable extends Component {
         dataIndex: 'text',
         key: 'text',
         render: (_, example) => (
-          <TextEditor example={example} index={example.index} />
+          <TextEditor
+            example={example}
+            index={example.index}
+          />
         ),
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
@@ -78,6 +71,7 @@ class ExampleTable extends Component {
         columns={columns}
         dataSource={examples.map((example, index) => ({...example, index}))}
         rowKey='index'
+        size='middle'
         expandedRowKeys={expandeds}
         onExpand={(expanded, example) => {
           if (expanded) {

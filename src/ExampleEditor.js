@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, PropTypes } from 'react';
-import { Input, Button } from 'antd'
+import { Button } from 'antd'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 import EntityTable from './EntityTable'
