@@ -84,6 +84,7 @@ class ExampleTable extends Component {
         pagination={{
           showSizeChanger: true,
           pageSizeOptions: ['10', '20', '40', '80', '160', '320'],
+          defaultPageSize: 40,
         }}
         expandedRowRender={(example) => (
           <ExampleEditor {...example}/>
