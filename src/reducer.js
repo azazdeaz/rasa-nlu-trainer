@@ -30,7 +30,6 @@ export default function reducer (
   state: Object = INITIAL_STATE,
   action: Object
 ): Object {
-  console.log(action)
   const { type, payload } = action
 
   switch (type) {

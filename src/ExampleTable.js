@@ -44,7 +44,6 @@ class ExampleTable extends Component {
       entityNames,
     } = this.props
     const { searchText, filterDropdownVisible } = this.state
-console.log('render', searchText)
     const columns = [
       {
         title: 'Intent',
@@ -73,6 +72,7 @@ console.log('render', searchText)
         render: (_, example) => (
           <TextEditor
             example={example}
+            entityNames={entityNames}
             index={example.index}
           />
         ),

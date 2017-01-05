@@ -27,7 +27,14 @@ const mapActions = dispatch => ({
 
 class ExampleTable extends Component {
   render() {
-    const { example, index, intents, close, saveAndClose } = this.props
+    const {
+      example,
+      index,
+      intents,
+      close,
+      saveAndClose,
+      entityNames,
+    } = this.props
 
     return (
       <Modal
@@ -40,14 +47,22 @@ class ExampleTable extends Component {
         {example
           ? (
             <div>
-              <TextEditor example={example} index={index} style={{marginBottom: 5}}/>
+              <TextEditor
+                example={example}
+                index={index}
+                entityNames={entityNames}
+                style={{marginBottom: 5}}
+              />
               <IntentEditor
                 example={example}
                 index={index}
                 intents={intents}
                 style={{marginBottom: 5}}
               />
-              <EntityTable index={index} />
+              <EntityTable
+                index={index}
+                entityNames={entityNames}
+              />
             </div>
           )
           : null

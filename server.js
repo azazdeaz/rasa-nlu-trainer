@@ -162,7 +162,6 @@ function serve() {
 
   app.post('/save', function (req, res) {
     const data = req.body
-    console.log('save', data)
     if (!data
       || !data.rasa_nlu_data
       || !data.rasa_nlu_data.entity_examples

@@ -119,6 +119,7 @@ class ExampleEditor extends Component {
   }
 
   renderEntityHighlight(text: string, entity: Object, key: number) {
+    const { entityNames } = this.props
     const start = text.substr(0, entity.start)
     const value = text.substr(entity.start, entity.end - entity.start)
     const end = text.substr(entity.end)
@@ -126,7 +127,7 @@ class ExampleEditor extends Component {
     return (
       <div key={key} style={{...styles.zeroPos, ...styles.highlightText}}>
         <span>{start}</span>
-        <span style={{...getColor(entity.entity)}}>
+        <span style={{...getColor(entityNames.indexOf(entity.entity))}}>
           {value}
         </span>
         <span>{end}</span>
