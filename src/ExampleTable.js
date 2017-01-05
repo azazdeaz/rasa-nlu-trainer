@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Table } from 'antd'
+import { Table, Input, Button } from 'antd'
 import { connect } from 'react-redux'
 import ExampleEditor from './ExampleEditor'
 import TextEditor from './TextEditor'
@@ -25,9 +25,19 @@ const mapActions = dispatch => ({
 })
 
 class ExampleTable extends Component {
+  state: Object;
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      filterDropdownVisible: false,
+      searchText: '',
+    }
+  }
   render() {
     const { examples, expandeds, expand, collapse, intents } = this.props
-
+    const { searchText, filterDropdownVisible } = this.state
+console.log('render', searchText)
     const columns = [
       {
         title: 'Intent',
@@ -62,6 +72,26 @@ class ExampleTable extends Component {
         sorter: (a, b) => {
           return a.intent.localeCompare(b.intent)
         },
+        filteredValue: searchText ? [searchText] : null,
+        onFilter: (value, example) => (
+          !value
+          || example.text.indexOf(value) !== -1
+        ),
+        filterDropdown: (
+          <div className='custom-filter-dropdown'>
+            <Input
+              placeholder='search in texts'
+              value={searchText}
+              onChange={event => this.setState({
+                searchText: event.target.value
+              })}
+            />
+          </div>
+        ),
+        filterDropdownVisible,
+        onFilterDropdownVisibleChange: visible => this.setState({
+          filterDropdownVisible: visible
+        }),
         width: '70%',
       },
     ]

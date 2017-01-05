@@ -19,7 +19,7 @@ const colors = [
 export default function getColor(seed) {
   const rand = randomSeed.create(seed)
   const index = rand(colors.length)
-  console.log('getColor', seed, index)
+
   return {
     backgroundColor: colors[index].bg,
     opacity: 0.3,
