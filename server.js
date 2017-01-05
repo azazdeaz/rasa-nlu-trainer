@@ -172,7 +172,10 @@ function serve() {
       if (error) {
         return res.json({error})
       }
-      return res.json({ok: true})
+      readData(sourceFile.path)
+        .then(json => sourceFile.data = json)
+        .catch(error => console.error(error))
+        .then(() => res.json({ok: true}))
     })
   })
 
