@@ -14,11 +14,11 @@ const mapActions = dispatch => ({
 
 class ExampleEditor extends Component {
   render() {
-    const { index, deleteExample } = this.props
+    const { index, deleteExample, entityNames } = this.props
 
     return (
       <div>
-        <EntityTable index={index} />
+        <EntityTable index={index} entityNames={entityNames} />
         <Button
           style={{ float: 'right' }}
           onClick={() => deleteExample(index)}

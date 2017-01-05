@@ -31,11 +31,20 @@ class App extends Component {
       }
     })
 
+    const entityNames = []
+    examples.forEach((example) => {
+      example.entities.forEach(({entity}) => {
+        if (entity && entityNames.indexOf(entity) === -1) {
+          entityNames.push(entity)
+        }
+      })
+    })
+
     return (
       <div>
         <TopBar/>
-        <ExampleTable intents={intents}/>
-        <AddExampleModal intents={intents}/>
+        <ExampleTable intents={intents} entityNames={entityNames}/>
+        <AddExampleModal intents={intents} entityNames={entityNames}/>
       </div>
     )
   }

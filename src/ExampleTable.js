@@ -35,7 +35,14 @@ class ExampleTable extends Component {
     }
   }
   render() {
-    const { examples, expandeds, expand, collapse, intents } = this.props
+    const {
+      examples,
+      expandeds,
+      expand,
+      collapse,
+      intents,
+      entityNames,
+    } = this.props
     const { searchText, filterDropdownVisible } = this.state
 console.log('render', searchText)
     const columns = [
@@ -117,7 +124,7 @@ console.log('render', searchText)
           defaultPageSize: 40,
         }}
         expandedRowRender={(example) => (
-          <ExampleEditor {...example}/>
+          <ExampleEditor {...example} entityNames={entityNames}/>
         )}
       />
     )

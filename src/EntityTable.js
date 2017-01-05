@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Table, Input, Button, Icon } from 'antd'
+import { Table, Input, Button, Icon, AutoComplete } from 'antd'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 import immutable from 'object-path-immutable'
@@ -60,34 +60,42 @@ class EntityTable extends Component {
       )
   }
   render() {
-    const { example, edit, index } = this.props
+    const { example, edit, index, entityNames } = this.props
     const entities = example.entities || []
-
-    const createInput = (key: string) => (_, entity) => {
-      return (
-        <Input
-          value={entity[key]}
-          onChange={event => this.handleChange(
-            entity.index,
-            key,
-            event.target.value,
-          )}
-          placeholder={key}
-        />
-      )
-    }
 
     const columns = [
       {
         title: 'Entity',
         dataIndex: 'entity',
         key: 'entity',
-        render: createInput('entity'),
+        render: (_, entity) => (
+          <AutoComplete
+            style={{width:200}}
+            dataSource={entityNames}
+            value={entity.entity}
+            onChange={value => this.handleChange(
+              entity.index,
+              'entity',
+              value,
+            )}
+            placeholder='entity'
+          />
+        ),
       }, {
         title: 'Value',
         dataIndex: 'value',
         key: 'value',
-        render: createInput('value'),
+        render: (_, entity) => (
+          <Input
+            value={entity.value}
+            onChange={event => this.handleChange(
+              entity.index,
+              'value',
+              event.target.value,
+            )}
+            placeholder='value'
+          />
+        ),
       }, {
         title: 'Selection',
         key: 'selection',
