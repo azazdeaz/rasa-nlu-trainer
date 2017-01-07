@@ -31,7 +31,7 @@
     "yargs": "^6.6.0"
   },
   "scripts": {
-    "start": "node server.js -p 4321 &! react-scripts start",
+    "start": "node server.js -p 4321 -d true &! react-scripts start",
     "build-demo": "react-scripts build",
     "build": "react-scripts build && replace '\"/rasa-nlu-trainer/' '\"/' ./build/index.html",
     "test": "react-scripts test --env=jsdom",

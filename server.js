@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 
 // @flow
-
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -30,11 +29,15 @@ const argv = require('yargs')
       alias: 'p',
       description: '<port>',
       requiresArg: true,
+    },
+    development: {
+      alias: 'd',
     }
   })
   .default({
     source: null,
     port: null,
+    development: false,
   })
   .argv
 
@@ -149,9 +152,11 @@ function serve() {
     })
   }
 
-  app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, './build', 'index.html'))
-  })
+  if (!argv.development) {
+    app.get('/', function (req, res) {
+      res.sendFile(path.join(__dirname, './build', 'index.html'))
+    })
+  }
 
   app.post('/data', function (req, res) {
     res.json({
@@ -188,8 +193,13 @@ function serve() {
 
   function listen(port) {
     app.listen(port)
-    const url = `http://localhost:${port}/`
-    console.log(`Listening at ${url}`)
-    open(url)
+    if (!argv.development) {
+      const url = `http://localhost:${port}/`
+      console.log(`Listening at ${url}`)
+      open(url)
+    }
+    else {
+      console.log('dev server listening at', port)
+    }
   }
 }
