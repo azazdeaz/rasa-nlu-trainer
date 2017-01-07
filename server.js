@@ -103,7 +103,7 @@ else {
     }
   }
 
-  const finder = findit('.')
+  const finder = findit(process.cwd())
   finder.on('directory', function (dir, stat, stop) {
     var base = path.basename(dir)
     if (base === '.git' || base === 'node_modules') stop()
@@ -111,16 +111,15 @@ else {
 
   finder.on('file', function (file) {
     if (file.substr(-5) === '.json' && !sourceFile.isLoaded) {
-      const fullPath = path.join(__dirname, file)
 
       inReading++
-      readData(path.join(__dirname, file))
+      readData(file)
         .then(data => {
           if (!sourceFile.isLoaded) { // an other file could be loaded in the meantime
             sourceFile.data = data,
-            sourceFile.path = fullPath
+            sourceFile.path = file
             sourceFile.isLoaded = true
-            console.log(`found ${fullPath}`)
+            console.log(`found ${file}`)
           }
         })
         .catch(() => {})
