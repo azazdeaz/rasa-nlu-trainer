@@ -1,6 +1,6 @@
 {
   "name": "rasa-nlu-trainer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "devDependencies": {
     "gh-pages": "^0.12.0",
     "react-scripts": "0.8.4",
@@ -8,7 +8,12 @@
   },
   "author": "Polgár András <azazdeaz@gmail.com>",
   "repository": "github:azazdeaz/rasa-nlu-trainer",
-  "keywords": ["rasa", "nlu", "nlp", "rasa-nlu"],
+  "keywords": [
+    "rasa",
+    "nlu",
+    "nlp",
+    "rasa-nlu"
+  ],
   "bugs": {
     "url": "https://github.com/azazdeaz/rasa-nlu-trainer/issues"
   },
