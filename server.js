@@ -13,7 +13,10 @@ const open = require('open')
 const updateNotifier = require('update-notifier')
 const pkg = require('./package.json')
 
-updateNotifier({pkg}).notify()
+updateNotifier({
+  pkg,
+  updateCheckInterval: 1000 * 60 * 60 * 24 // one day
+}).notify()
 
 const fs = require('fs')
 const argv = require('yargs')
