@@ -12,7 +12,7 @@ const mapState = (state) => ({
   expandeds: state.expandeds,
   examples: state.examples
     && state.examples.rasa_nlu_data
-    && state.examples.rasa_nlu_data.entity_examples
+    && state.examples.rasa_nlu_data.common_examples
 })
 
 const mapActions = dispatch => ({

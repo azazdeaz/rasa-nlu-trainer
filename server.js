@@ -66,8 +66,8 @@ function readData(path) {
       if (!json.rasa_nlu_data) {
         return reject('"rasa_nlu_data" is undefined')
       }
-      if (!json.rasa_nlu_data.entity_examples) {
-        return reject('"rasa_nlu_data.entity_examples" is undefined')
+      if (!json.rasa_nlu_data.common_examples) {
+        return reject('"rasa_nlu_data.common_examples" is undefined')
       }
 
       resolve(json)
@@ -168,7 +168,7 @@ function serve() {
     const data = req.body
     if (!data
       || !data.rasa_nlu_data
-      || !data.rasa_nlu_data.entity_examples
+      || !data.rasa_nlu_data.common_examples
     ) {
       res.json({error: 'file is invalid'})
     }

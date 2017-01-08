@@ -37,7 +37,7 @@ export default function reducer (
       const { index, value } = payload
       state = immutable.set(
         state,
-        `examples.rasa_nlu_data.entity_examples.${index}`,
+        `examples.rasa_nlu_data.common_examples.${index}`,
         value,
       )
       return {...state, isUnsaved: true}
@@ -51,7 +51,7 @@ export default function reducer (
       }
       state = immutable.del(
         state,
-        `examples.rasa_nlu_data.entity_examples.${index}`,
+        `examples.rasa_nlu_data.common_examples.${index}`,
       )
       return {...state, isUnsaved: true}
     }
@@ -96,16 +96,16 @@ export default function reducer (
     case OPEN_ADD_MODAL: {
       state = immutable.push(
         state,
-        `examples.rasa_nlu_data.entity_examples`,
+        `examples.rasa_nlu_data.common_examples`,
         {text: '', intent: '', entities: []},
       )
-      const index = state.examples.rasa_nlu_data.entity_examples.length - 1
+      const index = state.examples.rasa_nlu_data.common_examples.length - 1
       return immutable.set(state, `idxExampleInModal`, index)
     }
     case CLOSE_ADD_MODAL: {
       state = immutable.del(
         state,
-        `examples.rasa_nlu_data.entity_examples.${state.idxExampleInModal}`,
+        `examples.rasa_nlu_data.common_examples.${state.idxExampleInModal}`,
       )
       return immutable.set(state, `idxExampleInModal`, null)
     }
