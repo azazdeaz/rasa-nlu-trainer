@@ -10,7 +10,7 @@ import { Spin } from 'antd'
 const mapState = (state) => ({
   examples: state.examples
     && state.examples.rasa_nlu_data
-    && state.examples.rasa_nlu_data.entity_examples
+    && state.examples.rasa_nlu_data.common_examples
 })
 
 class App extends Component {

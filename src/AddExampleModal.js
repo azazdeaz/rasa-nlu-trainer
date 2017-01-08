@@ -12,8 +12,8 @@ const mapState = (state) => ({
   index: state.idxExampleInModal,
   example: state.examples
     && state.examples.rasa_nlu_data
-    && state.examples.rasa_nlu_data.entity_examples
-    && state.examples.rasa_nlu_data.entity_examples[state.idxExampleInModal]
+    && state.examples.rasa_nlu_data.common_examples
+    && state.examples.rasa_nlu_data.common_examples[state.idxExampleInModal]
 })
 
 const mapActions = dispatch => ({

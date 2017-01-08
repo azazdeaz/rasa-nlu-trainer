@@ -8,7 +8,7 @@ import immutable from 'object-path-immutable'
 
 const mapState = (state, props) => {
   const { index } = props
-  const example = state.examples.rasa_nlu_data.entity_examples[index]
+  const example = state.examples.rasa_nlu_data.common_examples[index]
   const selection = state.selection && state.selection.index === index
     ? state.selection
     : null
