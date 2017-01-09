@@ -1,6 +1,6 @@
 {
   "name": "rasa-nlu-trainer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "devDependencies": {
     "gh-pages": "^0.12.0",
     "react-scripts": "0.8.4",
@@ -48,5 +48,6 @@
   "bin": {
     "rasa-nlu-trainer": "./server.js"
   },
-  "homepage": "https://azazdeaz.github.io/rasa-nlu-trainer/"
+  "homepage": "https://azazdeaz.github.io/rasa-nlu-trainer/",
+  "license": "MIT"
 }
