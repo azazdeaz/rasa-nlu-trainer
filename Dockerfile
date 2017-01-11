@@ -1,5 +1,4 @@
 FROM node:7.4-alpine
-#RUN apk --update add --virtual npm
 RUN mkdir /rasa-nlu-data
 
 WORKDIR /rasa-nlu-trainer
