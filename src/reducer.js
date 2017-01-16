@@ -1,8 +1,7 @@
 // @flow
 import immutable from 'object-path-immutable'
 import testData from './testData.json'
-
-const IS_DEMO = location.origin.indexOf('github.io') !== -1
+import isOnline from './isOnline'
 
 import {
   EDIT,
@@ -19,7 +18,7 @@ import {
 
 const INITIAL_STATE = {
   filename: 'testData.json',
-  examples: IS_DEMO ? testData : null,
+  examples: isOnline ? testData : null,
   isUnsaved: false,
   selection: null,
   expandeds: [],
@@ -63,10 +62,7 @@ export default function reducer (
       return immutable.set(state, `selection`, { index, start, end })
     }
     case FETCH_DATA: {
-      if (IS_DEMO) {
-        return state
-      }
-      const { response: { data, path } } = payload
+      const { data, path } = payload
       return {
         ...state,
         examples: data,

@@ -1,11 +1,9 @@
 # rasa-nlu-trainer
 simple tool to edit your training examples for [rasa NLU](https://github.com/golastmile/rasa_nlu)
 
-## [online demo](https://azazdeaz.github.io/rasa-nlu-trainer/)
+Use the [online version](https://azazdeaz.github.io/rasa-nlu-trainer/) or [install with npm](#install)
 
 > this is a work in progress
-
-> the generated files may not have a proper syntax
 
 > i'm looking forward to your feedback :)
 

@@ -12,12 +12,17 @@ import thunk from 'redux-thunk'
 import * as actions from './actions'
 import './index.css'
 import 'antd/dist/antd.min.css'
+import isOnline from './isOnline'
 
 const store = createStore(
   reducer,
   applyMiddleware(thunk),
 )
-store.dispatch(actions.loadData())
+
+// only request data from the server if it is running locally
+if (!isOnline) {
+  store.dispatch(actions.loadData())
+}
 global.store = store //DEBUG
 
 ReactDOM.render(

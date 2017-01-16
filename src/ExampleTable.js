@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Table, Input, Button } from 'antd'
+import { Table, Input } from 'antd'
 import { connect } from 'react-redux'
 import ExampleEditor from './ExampleEditor'
 import TextEditor from './TextEditor'
