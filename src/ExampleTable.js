@@ -118,6 +118,17 @@ class ExampleTable extends Component {
             collapse(example.index)
           }
         }}
+        onRowClick={(example, index, event) => {
+          //TODO: use expandRowByClick prop instead of this hack
+          if (event.target.nodeName === 'TD') {
+            if (expandeds.indexOf(example.index) !== -1) {
+              collapse(example.index)
+            }
+            else {
+              expand(example.index)
+            }
+          }
+        }}
         pagination={{
           showSizeChanger: true,
           pageSizeOptions: ['10', '20', '40', '80', '160', '320'],
